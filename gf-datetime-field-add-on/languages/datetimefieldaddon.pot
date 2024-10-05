@@ -1,0 +1,54 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Gravity Forms DateTime Field Add-On\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-18 04:10+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.4.2; wp-5.5"
+
+#: includes/class-awaiswp-datetime-field-settings.php:40
+msgid "Enter Date Time Format"
+msgstr ""
+
+#: includes/class-awaiswp-datetime-field-settings.php:44
+msgid "Default: MM/DD/YYYY h:mm a"
+msgstr ""
+
+#: includes/class-awaiswp-datetime-field-settings.php:78
+msgid ""
+"Moment.js tokens (formats) are allowed. e.g.: 'MMMM Do YYYY [at] h:mm: a' - "
+"That would print something like: 'August 13th 2020 at 5:20 am' <br/> To see "
+"the moment.js date time format click <a target='_blank' href='https:"
+"//momentjs.com/docs/#/parsing/string-format/'>here</a>"
+msgstr ""
+
+#: includes/class-awaiswp-datetime-gf-field.php:24
+msgid "Date-Time"
+msgstr ""
+
+#. Name of the plugin
+msgid "DateTime Field Add-On for Gravity Form"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Add a datetime field for gravity form with an option for custom date time "
+"format"
+msgstr ""
+
+#. Author of the plugin
+msgid "Awais"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://awaiswp.com"
+msgstr ""
