@@ -63,7 +63,7 @@ class Awaiswp_GF_DateTime_Field_Addon extends \GFAddOn {
 		$styles = array(
 			array(
 				'handle'  => 'datetimepicker',
-				'src'     => $this->get_base_url() . '/css/jquery.datetimepicker.css',
+				'src'     => $this->get_base_url() . '/css/jquery.datetimepicker.min.css',
 				'version' => $this->_version,
 				'enqueue' => array(
 					array( 'field_types' => array( 'awaiswp_datetime' ) ),
@@ -90,7 +90,7 @@ class Awaiswp_GF_DateTime_Field_Addon extends \GFAddOn {
 			),
 			array(
 				'handle'  => 'datetimepicker',
-				'src'     => $this->get_base_url() . '/js/jquery.datetimepicker.js',
+				'src'     => $this->get_base_url() . '/js/jquery.datetimepicker.full.min.js',
 				'version' => $this->_version,
 				'deps'    => array( 'jquery' ),
 				'enqueue' => array(

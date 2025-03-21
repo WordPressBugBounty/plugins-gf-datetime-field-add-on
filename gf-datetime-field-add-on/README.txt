@@ -1,10 +1,10 @@
 === Date Time Field Add-On for Gravity Form ===
 Contributors: awais300
-Tags: GF, Gravity Form, datetime, date, time, addon
+Tags: Gravity Form, datetime, date, time, addon
 Requires at least: 4.0
-Tested up to: 6.4.3
+Tested up to: 6.7.2
 Requires PHP: 7.4
-Stable tag: 1.2.8
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,12 @@ A date-time add-on for Gravity Forms with custom date time format:
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Changelog ==
+
+= 1.3.2 =  
+* Added the filter hook `gf_awp_calendar_restricted_dates` to disable specific dates.
+* Added the filter hook `gf_awp_calendar_restricted_weekdays` to disable specific weekdays each month.
+* Improved the loading of the date-time picker to ensure proper functionality when multiple forms are on the same page.
+* Fixed the scrolling issue.
 
 = 1.2.8 =
 * Add a filter hook `gf_awp_calendar_week_start_day` to set start day of the week.

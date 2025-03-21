@@ -2,7 +2,7 @@
 /*
 Plugin Name: Date Time Field Add-On for Gravity Form
 Description: Add a datetime field for gravity form with an option for custom date time format
-Version: 1.2.8
+Version: 1.3.2
 Author: AWP
 Author URI: https://awaiswp.is-a-fullstack.dev/contact/
 Text Domain: datetimefieldaddon
@@ -11,7 +11,7 @@ Domain Path: /languages
 
 namespace Awaiswp;
 
-define( 'AWAISWP_GF_DATE_TIME_FIELD_ADDON_VERSION', '1.2.8' );
+define( 'AWAISWP_GF_DATE_TIME_FIELD_ADDON_VERSION', '1.3.2' );
 add_action( 'gform_loaded', array( 'Awaiswp\Awaiswp_GF_Datetime_Field_AddOn_Bootstrap', 'load' ), 5 );
 
 class Awaiswp_GF_Datetime_Field_AddOn_Bootstrap {
