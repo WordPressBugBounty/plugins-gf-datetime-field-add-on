@@ -88,7 +88,7 @@ class Awaiswp_DateTime_Field_Settings {
 	 *
 	 * @return Array
 	 */
-	public function datetime_add_gf_form_script( $form ) {
+	public function datetime_add_gf_form_script_old( $form ) {
 	    if ( is_admin() || true == defined( 'REST_REQUEST' ) ) {
 	        return $form;
 	    }
@@ -200,10 +200,8 @@ class Awaiswp_DateTime_Field_Settings {
 
 	        <script type="text/javascript">
 	            jQuery(document).on('gform_post_render', function (event, form_id, current_page) {
-	                //jQuery('.awp_datetimepicker').datetimepicker('destroy');
-
 	                <?php
-	                echo "$('#{$key}').datetimepicker('destroy'); ";
+	                echo "jQuery('#{$key}').datetimepicker('destroy'); ";
 
 	                foreach ( $dateime_fields as $key => $format ) {
 	                    if ( empty( $format ) ) {
@@ -240,6 +238,112 @@ class Awaiswp_DateTime_Field_Settings {
 
 	    <?php endif; ?>
 	    <?php
+	    return $form;
+	}
+
+	public function datetime_add_gf_form_script( $form ) {
+	    if ( is_admin() || true == defined( 'REST_REQUEST' ) ) {
+	        return $form;
+	    }
+	    
+	    $calendar_time_format = gf_apply_filters( array( 'gf_awp_calendar_time_format', $form['id'] ), 'h:mm a', $form );
+	    $calendar_allowed_time = gf_apply_filters( array( 'gf_awp_calendar_allow_time', $form['id'] ), array(), $form );
+	    $calendar_hide_past_days = gf_apply_filters( array( 'gf_awp_calendar_hide_past_dates', $form['id'] ), false, $form );
+	    $calendar_week_start_day = gf_apply_filters( array( 'gf_awp_calendar_week_start_day', $form['id'] ), 0, $form );
+	    $calendar_restricted_dates = gf_apply_filters( array( 'gf_awp_calendar_restricted_dates', $form['id'] ), array(), $form );
+	    $calendar_restricted_weekdays = gf_apply_filters( array( 'gf_awp_calendar_restricted_weekdays', $form['id'] ), array(), $form );
+	    
+	    $calendar_week_start_day = (int) $calendar_week_start_day;
+	    if ( $calendar_week_start_day < 0 || $calendar_week_start_day > 6 ) {
+	        $calendar_week_start_day = 0;
+	    }
+	    
+	    $min_date = $calendar_hide_past_days === true ? ",'minDate': 0" : '';
+	    
+	    $calendar_allowed_time = is_array( $calendar_allowed_time ) ? 
+	        json_encode( $calendar_allowed_time ) : 
+	        json_encode( array() );
+	    
+	    $calendar_restricted_dates = is_array( $calendar_restricted_dates ) ? 
+	        stripslashes( json_encode( $calendar_restricted_dates ) ) : 
+	        json_encode( array() );
+	    
+	    $calendar_restricted_weekdays = is_array( $calendar_restricted_weekdays ) ? 
+	        json_encode( $calendar_restricted_weekdays ) : 
+	        json_encode( array() );
+	    
+	    $allow_datepicker = (int) gf_apply_filters( array( 'gf_awp_calendar_datepicker', $form['id'] ), true, $form );
+	    $allow_timepicker = (int) gf_apply_filters( array( 'gf_awp_calendar_timepicker', $form['id'] ), true, $form );
+	    $allow_custom_js = gf_apply_filters( array( 'gf_awp_datetimepicker_script', $form['id'] ), true, $form );
+	    
+	    if ( ! $allow_custom_js ) {
+	        return $form;
+	    }
+	    
+	    $dateime_fields = array();
+	    foreach ( $form['fields'] as $key => $field ) {
+	        if ( $field instanceof \Awaiswp\Field\Awaiswp_DateTime_GF_Field ) {
+	            $id = 'input_' . absint( $field->formId ) . '_' . absint( $field->id );
+	            $dateime_fields[ $id ] = isset( $field->datetime_format ) ? 
+	                esc_html( trim( $field->datetime_format ) ) : 
+	                '';
+	        }
+	    }
+	    
+	    // Generate inline script
+	    $inline_script = "";
+	    if ( ! empty( $dateime_fields ) ) {
+	        $inline_script .= "(function($) {";
+	        $inline_script .= "$(document).ready(function() {";
+	        
+	        foreach ( $dateime_fields as $key => $format ) {
+	            $format_option = empty( $format ) ? 'MM/DD/YYYY h:mm a' : $format;
+	            
+	            $inline_script .= "$('#{$key}').datetimepicker({
+	                'format': '{$format_option}',
+	                'formatTime':'{$calendar_time_format}',
+	                'formatDate':'DD.MM.YYYY',
+	                'allowTimes':{$calendar_allowed_time},
+	                'datepicker':{$allow_datepicker},
+	                'dayOfWeekStart':{$calendar_week_start_day},
+	                'timepicker':{$allow_timepicker},
+	                'disabledDates':{$calendar_restricted_dates},
+	                'disabledWeekDays':{$calendar_restricted_weekdays}
+	                {$min_date}
+	            });";
+	        }
+	        
+	        $inline_script .= "});";
+	        
+	        $inline_script .= "$(document).on('gform_post_render', function(event, form_id, current_page) {";
+	        
+	        foreach ( $dateime_fields as $key => $format ) {
+	            $format_option = empty( $format ) ? 'MM/DD/YYYY h:mm a' : $format;
+	            
+	            $inline_script .= "$('#{$key}').datetimepicker('destroy').datetimepicker({
+	                'format': '{$format_option}',
+	                'formatTime':'{$calendar_time_format}',
+	                'formatDate':'DD.MM.YYYY',
+	                'allowTimes':{$calendar_allowed_time},
+	                'datepicker':{$allow_datepicker},
+	                'dayOfWeekStart':{$calendar_week_start_day},
+	                'timepicker':{$allow_timepicker},
+	                'disabledDates':{$calendar_restricted_dates},
+	                'disabledWeekDays':{$calendar_restricted_weekdays}
+	                {$min_date}
+	            });";
+	        }
+	        
+	        $inline_script .= "});";
+	        $inline_script .= "})(jQuery);";
+	    }
+	    
+	    // Enqueue jQuery and add inline script
+	    wp_enqueue_script('jquery');
+	    //wp_add_inline_script('datetimepicker', $inline_script, 'after');
+
+	    \GFFormDisplay::add_init_script($form['id'], 'datetimepicker', \GFFormDisplay::ON_PAGE_RENDER, $inline_script);
+	    
 	    return $form;
 	}
 }
