@@ -4,7 +4,7 @@ Tags: Gravity Form, datetime, date, time, addon
 Requires at least: 4.0
 Tested up to: 6.7.2
 Requires PHP: 7.4
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ A date-time add-on for Gravity Forms with custom date time format:
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Changelog ==
+
+= 1.3.6 =
+* Fix date formatting for non-English locales
 
 = 1.3.5 =
 * Resolved issue with datetime picker script loading inconsistently across different themes

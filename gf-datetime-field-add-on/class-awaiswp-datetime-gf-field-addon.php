@@ -90,7 +90,7 @@ class Awaiswp_GF_DateTime_Field_Addon extends \GFAddOn {
 			),
 			array(
 				'handle'  => 'datetimepicker',
-				'src'     => $this->get_base_url() . '/js/jquery.datetimepicker.full.min.js',
+				'src'     => $this->get_base_url() . '/js/jquery.datetimepicker.min.js',
 				'version' => $this->_version,
 				'deps'    => array( 'jquery' ),
 				'enqueue' => array(
