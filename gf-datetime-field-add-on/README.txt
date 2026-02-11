@@ -2,7 +2,7 @@
 Contributors: awais300
 Tags: Gravity Form, datetime, date, time, addon
 Requires at least: 4.0
-Tested up to: 6.7.2
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.3.6
 License: GPLv2 or later
